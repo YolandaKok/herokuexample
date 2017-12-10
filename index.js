@@ -12,7 +12,7 @@ var Schema = new mongoose.Schema({
 var Book = mongoose.model('Book', Schema);
 
 // MongoDB connect
-mongoose.connect(process.env.MONGOLAB_URI, function (error) {
+mongoose.connect(process.env.MONGODB_URI, function (error) {
     if (error) console.error(error);
     else console.log('mongo connected');
 });
