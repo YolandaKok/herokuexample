@@ -12,7 +12,7 @@ var Schema = new mongoose.Schema({
 var Book = mongoose.model('Book', Schema);
 
 // MongoDB connect
-mongoose.connect(process.env.MONGODB_URI, function (error) {
+mongoose.connect(process.env.MONGOLAB_URI, function (error) {
     if (error) console.error(error);
     else console.log('mongo connected');
 });
@@ -21,6 +21,18 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
+
+
+app.get('/books', function(req, res) {
+	Book.find({}).exec(function(err,books) {
+		if(err) {
+			res.send('No books found');
+		}
+		else {
+			res.json(books);
+		}
+	});
+});
 
 app.set('port', (process.env.PORT || 5000));
 
