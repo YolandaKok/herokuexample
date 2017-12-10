@@ -41,8 +41,8 @@ app.use(express.static(__dirname + '/public'));
 // views is directory for all template files
 app.set('views', __dirname + '/views');
 
-app.get('/', function(request, response) {
-  response.send('/public/index.html')
+app.get('*', function(request, response) {
+  response.sendFile('/public/index.html')
 });
 
 
