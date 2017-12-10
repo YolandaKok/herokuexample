@@ -1,5 +1,26 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+
+var Schema = new mongoose.Schema({
+  title: String,
+  author: String,
+  category: String
+});
+
+var Book = mongoose.model('Book', Schema);
+
+// MongoDB connect
+mongoose.connect(process.env.MONGOLAB_URI, function (error) {
+    if (error) console.error(error);
+    else console.log('mongo connected');
+});
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 
 app.set('port', (process.env.PORT || 5000));
 
