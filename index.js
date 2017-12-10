@@ -23,16 +23,12 @@ app.use(bodyParser.urlencoded({
 }));
 
 
-app.get('/books', function(req, res) {
-	Book.find({}).exec(function(err,books) {
-		if(err) {
-			res.send('No books found');
-		}
-		else {
-			res.json(books);
-		}
-	});
-});
+
+  app.get('/books', function (req, res) {
+    Book.find( function ( err, book ){
+      res.status(200).json(book);
+    });
+  });
 
 app.set('port', (process.env.PORT || 5000));
 
