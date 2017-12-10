@@ -25,7 +25,9 @@ app.use(bodyParser.urlencoded({
 
 
 app.get('/books', function (req, res) {
-    res.status(200);
+    Book.find( function ( err, book ){
+      res.status(200).json(book);
+    });
   });
 
 app.set('port', (process.env.PORT || 5000));
