@@ -32,11 +32,12 @@ app.get('/books', function (req, res) {
 
 app.set('port', (process.env.PORT || 5000));
 
+app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/node_modules'));
 
 // views is directory for all template files
-app.set('views', __dirname + '/views');
+//app.set('views', __dirname + '/views');
 
 app.get('*', function(request, response) {
   response.sendFile('/public/index.html')
