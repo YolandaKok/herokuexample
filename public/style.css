@@ -3,6 +3,17 @@ body {
   margin : 0 !important;
 }
 
+html {
+  padding: 0 !important;
+  margin : 0 !important;
+}
+
+img {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100%;
+}
+
 .navbar {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -13,8 +24,4 @@ body {
   padding: 0 !important;
   margin : 0 !important;
   width: 100% !important;
-}
-
-.image-crop {
-  width: 100%;
 }

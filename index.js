@@ -2,15 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-
-var Schema = new mongoose.Schema({
-  title: String,
-  author: String,
-  category: String,
-  year: Number
-});
-
-var Book = mongoose.model('Book', Schema);
+var Book = require('./Book');
 
 mongoose.Promise = global.Promise;
 
