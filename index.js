@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Book = require('./Book');
+var User = require('./User');
 
 mongoose.Promise = global.Promise;
 
