@@ -6,10 +6,13 @@ var mongoose = require('mongoose');
 var Schema = new mongoose.Schema({
   title: String,
   author: String,
-  category: String
+  category: String,
+  year: Number
 });
 
 var Book = mongoose.model('Book', Schema);
+
+mongoose.Promise = global.Promise;
 
 // MongoDB connect
 mongoose.connect(process.env.MONGOLAB_URI, function (error) {
@@ -29,6 +32,24 @@ app.get('/books', function (req, res) {
       res.status(200).json(book);
     });
   });
+
+app.post('/books', function (req, res) {
+      var newBook = Book();
+      newBook.title = req.body.title;
+      newBook.author = req.body.author;
+      newBook.category = req.body.category;
+      newBook.year = req.body.year;
+      newBook.save(function(err, book) {
+        if(err) {
+          res.send('Error inserting Book');
+        }
+        else {
+          console.log(book);
+          res.status(200).send(book);
+        }
+      });
+    });
+
 
 app.set('port', (process.env.PORT || 5000));
 
