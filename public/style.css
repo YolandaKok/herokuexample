@@ -1,3 +1,8 @@
+body {
+  padding: 0 !important;
+  margin : 0 !important;
+}
+
 .navbar {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
