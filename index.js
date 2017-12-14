@@ -43,6 +43,25 @@ app.post('/books', function (req, res) {
       });
     });
 
+// Sign up method with encryption of the password
+
+app.post('/signup', function (req, res) {
+  // Create a new user
+  var newUser = User();
+  newUser.username = req.body.username;
+  newUser.password = newUser.generateHash(req.body.password);
+  newUser.save(function(err, user) {
+    if(err) {
+      res.send('Error in sign up');
+    }
+    else {
+      console.log(user);
+      res.status(200).send(user);
+    }
+  });
+
+});
+
 
 app.set('port', (process.env.PORT || 5000));
 
