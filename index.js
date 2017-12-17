@@ -50,22 +50,24 @@ app.post('/signup', function (req, res) {
   // Create a new user
   var newUser = User();
   newUser.username = req.body.username;
-  //newUser.password = newUser.generateHash(req.body.password);
-  bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(req.body.password, salt, function(err, hash) {
-        newUser.password = hash;
-    });
-  });
-
   newUser.save(function(err, user) {
     if(err) {
       res.send('Error in sign up');
     }
     else {
-      console.log(user);
-      res.status(200).send(user);
+      //console.log(user);
+      //newUser.password = newUser.generateHash(req.body.password);
+      bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(req.body.password, salt, function(err, hash) {
+            newUser.password = hash;
+            newUser.save(function (err, user1) {
+                res.status(200).send(user1);
+            });
+        });
+      });
     }
   });
+
 });
 
 // Check if the user inserted the right credentials
