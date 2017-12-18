@@ -67,7 +67,6 @@ app.post('/signup', function (req, res) {
       });
     }
   });
-
 });
 
 // Check if the user inserted the right credentials
