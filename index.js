@@ -4,9 +4,11 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Book = require('./Book');
 var User = require('./User');
+// bcrypt library
 var bcrypt = require('bcrypt');
 
 mongoose.Promise = global.Promise;
+
 
 // MongoDB connect
 mongoose.connect(process.env.MONGOLAB_URI, function (error) {
