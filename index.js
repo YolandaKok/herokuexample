@@ -61,36 +61,45 @@ app.post('/signup', function (req, res) {
         });
     });
   });
-
 });
 
 // Check if the user inserted the right credentials
-app.post('/signin', function (req, res) {
-  // find if the user exists
-  User.findOne({username : req.body.username}, function (err, user) {
-    if (err) {
-      console.log('Error');
-    }
-    else {
-      // if the user exists
-      // check the hash of this password
-      bcrypt.compare(req.body.password, user.password, function(err, res) {
-        if(res) {
-          // Passwords match
-          console.log('Right Password');
-        }
-        else {
-          // Passwords don't match
-          console.log('Wrong Password');
-        }
-      });
-      // console.log(user.password);
-      // res.status(200);
-    }
-  });
-});
+app.post('/signin', findUser);
 
+// find the user
+function findUser(req, res) {
+ // bind to pass parameters to callback function
+ /* Bind: method creates a new function that, when called,
+ has its this keyword set to the provided value,
+ with a given sequence of arguments preceding any
+ provided when the new function is called */
+ User.findOne({username : req.body.username}, checkPassword.bind({req:req}));
+}
 
+function checkPassword(err, user) {
+  if (err) {
+    console.log('Error');
+  }
+  else {
+    // if the user exists
+    // check the hash of this password
+    bcrypt.compare(this.req.body.password, user.password, checkIdentity);
+    // console.log(user.password);
+    // res.status(200);
+  }
+}
+
+// Check Identity
+function checkIdentity(err, res) {
+  if(res) {
+    // Passwords match
+    console.log('Right Password');
+  }
+  else {
+    // Passwords don't match
+    console.log('Wrong Password');
+  }
+}
 
 app.set('port', (process.env.PORT || 5000));
 
